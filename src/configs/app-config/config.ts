@@ -12,4 +12,4 @@ export const applicationConfig = {
     host: process.env[`DATABASE_HOST`],
     url: process.env[`DATABASE_URL`],
   },
-}
+};

@@ -1,8 +1,14 @@
 import { NestFactory } from '@nestjs/core';
 import { AppModule } from './app.module';
+import { ValidationPipe } from '@nestjs/common';
 
 async function bootstrap() {
   const app = await NestFactory.create(AppModule);
+
+  app.setGlobalPrefix(process.env.API_PREFIX, {
+    exclude: ['/'], //Adds a prefix like /api to all routes except /, which remains unprefixed. Great for versioning.
+  });
+  app.useGlobalPipes(new ValidationPipe()); //Ensures that incoming requests conform to your DTO validation rules.
 
   //cors configuration
   app.enableCors({
